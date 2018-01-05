@@ -6,6 +6,8 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 
 https://www.nuget.org/packages/AspnetCoreApiDoc/
 
+`Install-Package AspnetCoreApiDoc`
+
 # 生成文档示例
 
 ![示例文档](Sample-img.png)
