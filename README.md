@@ -1,6 +1,10 @@
 # 关于
 
-惠订房API文档自动生成项目，用于对APP端的开发帮助文档生成，默认`ProtoBuffer`传输格式, 目前版本禁用`Json`传输格式
+API文档自动生成，用于对APP端的开发帮助文档生成，默认`ProtoBuffer`传输格式
+
+# Nuget下载
+
+https://www.nuget.org/packages/AspnetCoreApiDoc/
 
 # 生成文档示例
 
