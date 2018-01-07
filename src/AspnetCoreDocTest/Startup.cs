@@ -24,8 +24,8 @@ namespace AspnetCoreDocTest
         public void ConfigureServices(IServiceCollection services)
         {
             //加载日志记录组件
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<ESClientProvider>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<ESClientProvider>();
 
             //注册API文档服务
             services.AddProtoMvc(op =>
