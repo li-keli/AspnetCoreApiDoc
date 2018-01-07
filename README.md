@@ -108,6 +108,9 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
   </PropertyGroup>
 ```
 
+**NO.5**
+通过游览器打开`http://localhost:5000/core/v1/api.do`来访问API文档
+
 完整实例：
 
 ```c#
