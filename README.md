@@ -21,6 +21,7 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 # 说明文档
 
 **NO.1**
+
 引用项目后，在`Startup.cs`中的`ConfigureServices`方法加入如下代码，进行服务注册：
 
 ```c#
@@ -59,6 +60,7 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 ```
 
 **NO.2**
+
 在`Configure`方法启用服务：
 
 ```c#
@@ -67,6 +69,7 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 ```
 
 **NO.3**
+
 在需要生成API文档的控制器`Controller``或`方法`Action`上添加`ApiDoc`特性标记
 
 例如：
@@ -97,6 +100,7 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 在controller上添加ApiDoc特性后，可以在该控制器下的action上再添加`ApiDoc(false)`来停止某个单独方法的文档生成
 
 **NO.4**
+
 给API的项目和所有其依赖的项目的`.csproj`文件中的`Project`节点下都加上生成XML的配置，如下:
 
 ```C#
@@ -109,7 +113,8 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 ```
 
 **NO.5**
-通过游览器打开`http://localhost:5000/core/v1/api.do`来访问API文档
+
+> 通过游览器打开`http://localhost:5000/core/v1/api.do`来访问API文档
 
 完整实例：
 
