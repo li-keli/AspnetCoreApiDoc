@@ -16,7 +16,11 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 
 # 生成文档示例
 
-![示例文档](Sample-img.png)
+![示例文档](img/Sample-img.png)
+
+![线上文档更新后立即提示](img/2018-04-11_11.06.png)
+
+![线上文档更新后立即提示](img/2018-04-11_11.07.png)
 
 # 说明文档
 
@@ -28,6 +32,7 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
     //注册API文档服务
     services.AddProtoMvc(op =>
     {
+        op.IsOpenDoc = true; // 开放文档访问
         op.ApiOptions = new ApiOptions
         {
             //API文档访问的路由; 推荐和API地址访问保持一致
@@ -137,6 +142,7 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
             //注册API文档服务
             services.AddProtoMvc(op =>
             {
+                op.IsOpenDoc = true; // 开放文档访问
                 op.ApiOptions = new ApiOptions
                 {
                     //API文档访问的路由; 推荐和API地址访问保持一致
@@ -184,6 +190,10 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
         }
     }
 ```
+
+# 其他工具
+
+在tool目录下提供了批量下载proto文件的工具`apiprotoasnic.go`，基于go编写，源代码很简单，就是解析json，这里不再单独的提供说明文档。
 
 # 约定
 

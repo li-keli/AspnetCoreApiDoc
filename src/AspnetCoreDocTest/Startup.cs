@@ -30,6 +30,7 @@ namespace AspnetCoreDocTest
             //注册API文档服务
             services.AddProtoMvc(op =>
             {
+                op.IsOpenDoc = true; // 开启文档访问 
                 op.ApiOptions = new ApiOptions
                 {
                     //API文档访问的路由; 推荐和API地址访问保持一致

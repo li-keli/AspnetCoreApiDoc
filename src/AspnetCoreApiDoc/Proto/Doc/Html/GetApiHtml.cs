@@ -27,7 +27,7 @@ namespace AspnetCoreApiDoc.Proto.Doc.Html
     {(string.IsNullOrWhiteSpace(coverageSvg) ? "" : $"<a href='javascript:void(0)'><img alt='代码覆盖率' src='{coverageSvg}' /></a>")}
 </div>
 ");
-            return Regex.Replace(html, "\\n+\\s+", string.Empty);
+            return html;
         }
     }
 }

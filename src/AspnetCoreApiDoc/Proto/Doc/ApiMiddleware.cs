@@ -23,6 +23,7 @@ namespace AspnetCoreApiDoc.Proto.Doc
         private readonly string _uiHost;     // UI地址
         private readonly string _docHost;    // API数据地址
         private readonly string _wsHost;     // websocket地址
+        private readonly bool _isOpenDoc;    // 是否开启文档
 
         public ApiMiddleware(
             RequestDelegate next,
@@ -34,6 +35,7 @@ namespace AspnetCoreApiDoc.Proto.Doc
             _setting = setting;
             _apiSerializer = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore, };
 
+            _isOpenDoc = setting.Value.IsOpenDoc;
             _wsHost = setting.Value.ApiOptions.Host + "/ws";
             _uiHost = setting.Value.ApiOptions.Host + "/api.do";
             _docHost = setting.Value.ApiOptions.Host + "/doc";
@@ -41,38 +43,48 @@ namespace AspnetCoreApiDoc.Proto.Doc
 
         public async Task Invoke(HttpContext httpContext)
         {
-            if (httpContext.WebSockets.IsWebSocketRequest)
+            if (_isOpenDoc)
             {
-                await EchoLoop(httpContext);
-            }
-            if (httpContext.Request.Path.Value == _uiHost)
-            {
-                var uiStr = GetApiHtml.Get(_docHost, _wsHost, _setting.Value.ApiOptions.BuildSvg, _setting.Value.ApiOptions.CoverageSvg);
-                httpContext.Response.ContentType = "text/html; charset=utf-8";
-                await httpContext.Response.WriteAsync(uiStr);
-                return;
-            }
-            if (httpContext.Request.Path.Value == _docHost && httpContext.Request.Method == "POST")
-            {
-                var protoBuf = PostInput(httpContext).Replace("=", string.Empty);
-                switch (protoBuf)
+                // 处理websock请求（此处请求用于保持文档页面的实时更新提示）
+                if (httpContext.WebSockets.IsWebSocketRequest)
                 {
-                    case "2":
-                        _setting.Value.ApiOptions.ProtoBufVersion = ProtoBufEnum.Proto2;
-                        break;
-                    case "3":
-                        _setting.Value.ApiOptions.ProtoBufVersion = ProtoBufEnum.Proto3;
-                        break;
+                    await EchoLoop(httpContext);
                 }
-                var apiDoc = _apiProvider.GetApi();
-                RespondWithApiJson(httpContext.Response, apiDoc);
-                return;
-            }
-            if (httpContext.Request.Headers["Accept"].ToString() != "application/x-protobuf")
-            {
+
+                // 输出文档裸页面
+                if (httpContext.Request.Path.Value == _uiHost)
+                {
+                    var uiStr = GetApiHtml.Get(_docHost, _wsHost, _setting.Value.ApiOptions.BuildSvg, _setting.Value.ApiOptions.CoverageSvg);
+                    httpContext.Response.ContentType = "text/html; charset=utf-8";
+                    await httpContext.Response.WriteAsync(uiStr);
+                    return;
+                }
+
+                // 输出文档内容
+                if (httpContext.Request.Path.Value == _docHost && httpContext.Request.Method == "POST")
+                {
+                    var protoBuf = PostInput(httpContext).Replace("=", string.Empty);
+                    switch (protoBuf)
+                    {
+                        case "2":
+                            _setting.Value.ApiOptions.ProtoBufVersion = ProtoBufEnum.Proto2;
+                            break;
+                        case "3":
+                            _setting.Value.ApiOptions.ProtoBufVersion = ProtoBufEnum.Proto3;
+                            break;
+                    }
+
+                    var apiDoc = _apiProvider.GetApi();
+                    RespondWithApiJson(httpContext.Response, apiDoc);
+                    return;
+                }
+
                 // 过滤非proto请求
-                httpContext.Response.StatusCode = 404;
-                return;
+                if (httpContext.Request.Headers["Accept"].ToString() != "application/x-protobuf")
+                {
+                    httpContext.Response.StatusCode = 404;
+                    return;
+                }
             }
 
             await _next(httpContext);

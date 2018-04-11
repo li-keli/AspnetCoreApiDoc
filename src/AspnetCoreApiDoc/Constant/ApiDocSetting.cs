@@ -8,6 +8,11 @@ namespace AspnetCoreApiDoc.Constant
     public class ApiDocSetting
     {
         /// <summary>
+        /// 是否开启文档访问
+        /// </summary>
+        public bool IsOpenDoc { set; get; } = true;
+
+        /// <summary>
         /// ES日志服务器配置
         /// </summary>
         public ESOptions ESOptions { set; get; }
