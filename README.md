@@ -14,6 +14,11 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 
 > Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.
 
+# 交流
+
+* Bugs: [Issues](https://github.com/li-keli/AspnetCoreApiDoc/issues/new)
+* Gitter: [Gitter channel](https://gitter.im/AspnetCoreApiDoc/AspNetCoreApiDoc)
+
 # 生成文档示例
 
 ![示例文档](img/Sample-img.png)
