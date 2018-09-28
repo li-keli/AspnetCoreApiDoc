@@ -16,7 +16,7 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 
 # 交流
 
-* Bugs: [Issues](https://github.com/li-keli/AspnetCoreApiDoc/issues/new)
+* Bugs: [Issues](https://github.com/li-keli/AspnetCoreApiDoc/issues)
 * Gitter: [Gitter channel](https://gitter.im/AspnetCoreApiDoc/AspNetCoreApiDoc)
 
 # 生成文档示例
