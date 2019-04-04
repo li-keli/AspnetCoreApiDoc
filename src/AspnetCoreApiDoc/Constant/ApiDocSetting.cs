@@ -34,12 +34,12 @@ namespace AspnetCoreApiDoc.Constant
     public class ApiOptions
     {
         /// <summary>
-        /// 访问的Host
+        /// 访问的Router
         /// 例如访问地址为 /core/v1/api.do
-        /// Host的值为：/core/v1;
+        /// Router的值为：/core/v1;
         /// 推荐和API的访问路由一致
         /// </summary>
-        public string Host { set; get; }
+        public string DocRouter { set; get; }
 
         /// <summary>
         /// API名称
