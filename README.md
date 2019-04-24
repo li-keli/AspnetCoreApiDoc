@@ -1,7 +1,6 @@
 # 关于
 
 [![Build Status](https://travis-ci.com/li-keli/AspnetCoreApiDoc.svg?branch=master)](https://travis-ci.com/li-keli/AspnetCoreApiDoc)
-[![Build Status](https://travis-ci.com/li-keli/AspnetCoreApiDoc.svg?branch=vue-ui)](https://travis-ci.com/li-keli/AspnetCoreApiDoc)
 
 API文档自动生成，用于对APP端的开发帮助文档生成，默认`ProtoBuffer`传输格式。
 

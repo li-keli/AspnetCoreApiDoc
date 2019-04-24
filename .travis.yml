@@ -1,3 +1,4 @@
+language: csharp
 mono: none
 sudo: required
 dist: xenial
