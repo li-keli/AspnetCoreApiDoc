@@ -36,9 +36,9 @@ namespace AspnetCoreApiDoc.Proto.Doc
             _apiSerializer = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore, };
 
             _isOpenDoc = setting.Value.IsOpenDoc;
-            _wsHost = setting.Value.ApiOptions.Host + "/ws";
-            _uiHost = setting.Value.ApiOptions.Host + "/api.do";
-            _docHost = setting.Value.ApiOptions.Host + "/doc";
+            _wsHost = setting.Value.ApiOptions.DocRouter + "/ws";
+            _uiHost = setting.Value.ApiOptions.DocRouter + "/api.do";
+            _docHost = setting.Value.ApiOptions.DocRouter + "/doc";
         }
 
         public async Task Invoke(HttpContext httpContext)

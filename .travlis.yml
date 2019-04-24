@@ -1,0 +1,11 @@
+language: csharp
+solution: AspnetCoreDoc.sln
+mono: none
+dotnet:
+  - 2.0
+  - 2.1
+  - 2.2
+script:
+  - cd src
+  - dotnet build
+  - dotnet test

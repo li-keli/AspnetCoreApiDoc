@@ -16,7 +16,7 @@ namespace AspnetCoreDocUnitTest
     {
         private readonly TestServer _server;
         private readonly HttpClient _client;
-        private const string Host = "core/v1/Api/";
+        private const string Host = "core/v1/api/";
         private readonly ITestOutputHelper _output;
 
         public ApiTest(ITestOutputHelper output)
