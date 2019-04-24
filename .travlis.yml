@@ -1,11 +1,10 @@
 language: csharp
-solution: AspnetCoreDoc.sln
 mono: none
-dotnet:
-  - 2.0
-  - 2.1
-  - 2.2
+dotnet: 2.2.106
+
+install:
+  - dotnet restore src/AspnetCoreDoc.sln
+
 script:
-  - cd src
-  - dotnet build
-  - dotnet test
+  - dotnet build src/AspnetCoreDoc.sln
+  - dotnet test src/AspnetCoreDoc.sln
