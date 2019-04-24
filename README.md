@@ -1,5 +1,7 @@
 # 关于
 
+[![Build Status](https://travis-ci.com/li-keli/AspnetCoreApiDoc.svg?branch=master)](https://travis-ci.com/li-keli/AspnetCoreApiDoc)
+
 API文档自动生成，用于对APP端的开发帮助文档生成，默认`ProtoBuffer`传输格式。
 
 本项目并不是`RESTful`风格，是面向功能的API类型。APiDoc的作用是根据定义好的API接口和注释来自动生成给内部开发者提供的API对接文档。
