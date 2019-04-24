@@ -8,7 +8,7 @@ branches:
     - vue-ui
     
 dotnet: 
-  - 2.2.203
+  - 2.2.100
   - 2.1.603
 
 install:
