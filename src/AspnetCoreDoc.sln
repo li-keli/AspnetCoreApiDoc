@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99_文档", "99_文档", "{
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = ../.gitignore
 		README.md = ../README.md
-		.travlis.yml = ../.travlis.yml
+		.travis.yml = ../.travis.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspnetCoreApiDoc", "AspnetCoreApiDoc\AspnetCoreApiDoc.csproj", "{DAD3E2A6-5686-4D96-B627-D41650E55D3D}"
