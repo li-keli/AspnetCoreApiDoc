@@ -1,10 +1,15 @@
 language: csharp
 mono: none
 dist: trusty
+
+branches:
+  only:
+    - master
+    - vue-ui
+    
 dotnet: 
-  - 2.2.3
-  - 2.2.2
-  - 2.1.9
+  - 2.2.203
+  - 2.1.603
 
 install:
   - dotnet restore src/AspnetCoreDoc.sln
