@@ -2,3 +2,5 @@ bin
 .git
 .idea
 obj/
+*.DotSettings.user
+.DS_Store
