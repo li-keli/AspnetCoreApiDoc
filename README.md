@@ -43,10 +43,10 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
         op.ApiOptions = new ApiOptions
         {
             //API文档访问的路由; 推荐和API地址访问保持一致
-            Host = "/core/v1",
+            DocRouter = "/core/v1",
             ApiName = "样例API文档",
             APiVersion = "v1.0",
-            Copyright = "Copyright©2017-2018 api.com All Rights Reserved. ",
+            Copyright = "Copyright©2018-2011 api.com All Rights Reserved. ",
             ProtoBufVersion = ProtoBufEnum.Proto3,
             NetworkDocs = new List<NetworkDoc>
             {
@@ -153,10 +153,10 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
                 op.ApiOptions = new ApiOptions
                 {
                     //API文档访问的路由; 推荐和API地址访问保持一致
-                    Host = "/core/v1",
+                    DocRouter = "/core/v1",
                     ApiName = "样例API文档",
                     APiVersion = "v1.0",
-                    Copyright = "Copyright©2017-2018 api.com All Rights Reserved. ",
+                    Copyright = "Copyright©2018-2011 api.com All Rights Reserved. ",
                     ProtoBufVersion = ProtoBufEnum.Proto3,
                     NetworkDocs = new List<NetworkDoc>
                     {
