@@ -1,7 +1,7 @@
 # 关于
 
 [![Build Status](https://travis-ci.com/li-keli/AspnetCoreApiDoc.svg?branch=master)](https://travis-ci.com/li-keli/AspnetCoreApiDoc)
-[![Version Status](https://img.shields.io/badge/AspnetCoreApiDoc.version-v3.0.2-green.svg)](https://www.nuget.org/packages/AspnetCoreApiDoc)
+[![Version Status](https://img.shields.io/badge/AspnetCoreApiDoc.version-v3.1.0-green.svg)](https://www.nuget.org/packages/AspnetCoreApiDoc)
 [![NetCore Status](https://img.shields.io/badge/.Net%20core-v2.2-blue.svg)](https://github.com/li-keli/AspnetCoreApiDoc)
 [![Platform Status](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey.svg)](https://github.com/li-keli/AspnetCoreApiDoc)
 
