@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.com/li-keli/AspnetCoreApiDoc.svg?branch=master)](https://travis-ci.com/li-keli/AspnetCoreApiDoc)
 
+[![AspnetCoreApiDoc.version](https://www.nuget.org/packages/AspnetCoreApiDoc)](https://img.shields.io/badge/AspnetCoreApiDoc.version-v3.0.2-green.svg)
+
+[![https://github.com/li-keli/AspnetCoreApiDoc)](https://img.shields.io/badge/.Net%20core-v2.2-blue.svg)
+
+[![https://github.com/li-keli/AspnetCoreApiDoc)](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey.svg)
+
 API文档自动生成，用于对APP端的开发帮助文档生成，默认`ProtoBuffer`传输格式。
 
 本项目并不是`RESTful`风格，是面向功能的API类型。APiDoc的作用是根据定义好的API接口和注释来自动生成给内部开发者提供的API对接文档。
