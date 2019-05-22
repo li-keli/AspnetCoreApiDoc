@@ -213,4 +213,4 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 # License
 
 * MIT License
-* 996ICU License
+* 996ICU [License](https://github.com/996icu/996.ICU/blob/master/LICENSE)
