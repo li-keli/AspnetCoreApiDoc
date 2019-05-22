@@ -212,7 +212,5 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 
 # License
 
-[反 996 许可证](LICENSE)
-
- - 此许可证的目的是阻止违反劳动法的公司使用许可证下的软件或代码，并强迫这些公司权衡他们的行为。
- - 在此处查看反 996 许可证下的[完整项目列表](https://github.com/996icu/996.ICU/tree/master/awesomelist)
+* MIT License
+* 996ICU License
