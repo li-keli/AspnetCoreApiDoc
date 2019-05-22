@@ -4,6 +4,7 @@
 [![Version Status](https://img.shields.io/badge/AspnetCoreApiDoc.version-v3.0.2-green.svg)](https://www.nuget.org/packages/AspnetCoreApiDoc)
 [![NetCore Status](https://img.shields.io/badge/.Net%20core-v2.2-blue.svg)](https://github.com/li-keli/AspnetCoreApiDoc)
 [![Platform Status](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey.svg)](https://github.com/li-keli/AspnetCoreApiDoc)
+[![top.996](https://img.shields.io/badge/link-top.996-red.svg)](https://github.com/top996/top.996)
 
 API文档自动生成，用于对APP端的开发帮助文档生成，默认`ProtoBuffer`传输格式。
 
@@ -209,6 +210,9 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 
 * 所有API的方法传入参数必须从Body中读取
 
-# 版权
+# License
 
-本项目采用 MIT 开源授权许可证
+[反 996 许可证](LICENSE)
+
+ - 此许可证的目的是阻止违反劳动法的公司使用许可证下的软件或代码，并强迫这些公司权衡他们的行为。
+ - 在此处查看反 996 许可证下的[完整项目列表](https://github.com/996icu/996.ICU/tree/master/awesomelist)
