@@ -17,7 +17,7 @@ import (
 	"os"
 )
 
-var targeUrl string = "https://api.***.com/api/v1/doc"
+var targeUrl string = "https://[[host]]/api/v1/doc"
 
 func main() {
 	var (
@@ -49,6 +49,12 @@ func main() {
 		group := jsonModel.APIGroups[1]
 		fmt.Println(group.GroupName)
 		whileProto(outputDic, group.DAPIInfo)
+		break
+	case "en":
+		// 输出book文档
+		// group := jsonModel.APIGroups[1]
+		// fmt.Println(group.GroupName)
+		// whileProto(outputDic, group.DAPIInfo)
 		break
 	default:
 		fmt.Fprintf(os.Stderr, "no find platform type :%s \n", *platform)
