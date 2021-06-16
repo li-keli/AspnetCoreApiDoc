@@ -35,7 +35,7 @@ func main() {
 	}
 
 	jsonModel := httpPost()
-	fmt.Fprintf(os.Stderr, "Api Doc Version: %s \n", jsonModel.Version)
+	fmt.Fprintf(os.Stderr, "API Document Version: %s \n", jsonModel.Version)
 	os.MkdirAll(*output+*platform, 0711)
 
 	outputDic := *output + *platform + "/"
@@ -49,12 +49,6 @@ func main() {
 		group := jsonModel.APIGroups[1]
 		fmt.Println(group.GroupName)
 		whileProto(outputDic, group.DAPIInfo)
-		break
-	case "en":
-		// 输出book文档
-		// group := jsonModel.APIGroups[1]
-		// fmt.Println(group.GroupName)
-		// whileProto(outputDic, group.DAPIInfo)
 		break
 	default:
 		fmt.Fprintf(os.Stderr, "no find platform type :%s \n", *platform)
