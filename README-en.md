@@ -19,3 +19,16 @@ This project is not a `RESTful` style, but a function-oriented API type. The rol
 Official description：
 
 > Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.
+
+# communicate with
+
+* Bugs: [Issues](https://github.com/li-keli/AspnetCoreApiDoc/issues)
+* Gitter: [Gitter channel](https://gitter.im/AspnetCoreApiDoc/AspNetCoreApiDoc)
+
+# Generate documentation example
+
+![Sample document](img/Sample-img.png)
+
+![Prompt immediately after the online document is updated](img/2018-04-11_11.06.png)
+
+![Prompt immediately after the online document is updated](img/2018-04-11_11.07.png)
