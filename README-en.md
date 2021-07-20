@@ -135,3 +135,82 @@ Add the configuration of generating XML to the `Project` node in the `.csproj` f
 Full example:
 
 ```c#
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+    
+        public IConfiguration Configuration {get;}
+    
+        public void ConfigureServices(IServiceCollection services)
+        {
+            //Load logging component
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<ESClientProvider>();
+    
+            //Register API document service
+            services.AddProtoMvc(op =>
+            {
+                op.IsOpenDoc = true; // Open document access
+                op.ApiOptions = new ApiOptions
+                {
+                    //Route for API document access; recommended to be consistent with API address access
+                    DocRouter = "/core/v1",
+                    ApiName = "Sample API Document",
+                    APiVersion = "v1.0",
+                    Copyright = "Copyright©2018-2011 api.com All Rights Reserved. ",
+                    ProtoBufVersion = ProtoBufEnum.Proto3,
+                    NetworkDocs = new List<NetworkDoc>
+                    {
+                        new NetworkDoc
+                        {
+                            Title = "Default Web Document One",
+                            Url = "https://www.baidu.com/"
+                        },
+                        new NetworkDoc
+                        {
+                            Title = "My Blog",
+                            Url = "http://www.cnblogs.com/likeli/"
+                        },
+                    }
+                };
+                //Configure the ES log service address here
+                //op.ESOptions = new ESOptions
+                //{
+                // Uri = "http://192.168.0.1:9200",
+                // DefaultIndex = "test-log",
+                //};
+            });
+        }
+    
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            //Start ES log service
+            //loggerFactory
+            // .AddESLogger(app.ApplicationServices, "test-log", new FilterLoggerSettings
+            // {
+            // {"*", LogLevel.Trace},
+            // {"Microsoft", LogLevel.Warning},
+            // {"System", LogLevel.Warning},
+            // });
+            app.UseStatusCodePages()
+                .UseApi(); //Enable API document generation
+        }
+    }
+```
+
+# Other tools
+
+The tool `apiprotoasnic.go` is provided in the tool directory to download proto files in batches. Based on Go, the source code is very simple, that is, to parse json. No separate documentation is provided here.
+
+# Convention
+
+* The incoming parameters of all API methods must be read from the Body
+
+# License
+
+* MIT License
+* 996ICU [License](https://github.com/996icu/996.ICU/blob/master/LICENSE)
