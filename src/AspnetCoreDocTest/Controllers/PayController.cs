@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspnetCoreDocTest.Controllers
 {
-    [ApiDoc("API文档目录二"), Route("/core/v1/[controller]/[action]/")]
+    [ApiDoc("模拟支付"), Route("/core/v1/[controller]/[action]/")]
     public class PayController
     {
         /// <summary>
-        /// 获取产品
+        /// 获取支付产品信息
         /// </summary>
-        /// <param name="input">输入参数</param>
-        /// <returns>输出参数</returns>
+        /// <param name="input">请求参数</param>
+        /// <returns>响应参数</returns>
         [HttpPost]
         public ProductInput GetProduct2([FromBody] ProductInput input)
         {
