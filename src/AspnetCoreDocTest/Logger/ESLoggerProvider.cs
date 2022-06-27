@@ -23,6 +23,7 @@ namespace AspnetCoreDocTest.Logger
 
             _filter = filter ?? new FilterLoggerSettings
             {
+                // 链路追踪日志配置
                 {"*", LogLevel.Trace}
             };
         }
