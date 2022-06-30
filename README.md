@@ -80,8 +80,7 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 在`Configure`方法启用服务：
 
 ```c#
-    app.UseStatusCodePages()
-        .UseApi();  //启用API文档生成
+    app.UseStatusCodePages().UseApi();  //启用API文档生成
 ```
 
 **NO.3**
@@ -117,6 +116,7 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
 
 **NO.4**
 
+> 此方案已经过时，可以参考5.0的xml生成方案
 给API的项目和所有其依赖的项目的`.csproj`文件中的`Project`节点下都加上生成XML的配置，如下:
 
 ```C#
@@ -176,26 +176,12 @@ API文档自动生成，用于对APP端的开发帮助文档生成，默认`Prot
                         },
                     }
                 };
-                //此处配置ES日志服务地址
-                //op.ESOptions = new ESOptions
-                //{
-                //    Uri = "http://192.168.0.1:9200",
-                //    DefaultIndex = "test-log",
-                //};
             });
         }
     
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            //启动ES日志服务
-            //loggerFactory
-            //    .AddESLogger(app.ApplicationServices, "test-log", new FilterLoggerSettings
-            //    {
-            //        {"*", LogLevel.Trace},
-            //        {"Microsoft", LogLevel.Warning},
-            //        {"System", LogLevel.Warning},
-            //    });
             app.UseStatusCodePages()
                 .UseApi(); //启用API文档生成
         }
