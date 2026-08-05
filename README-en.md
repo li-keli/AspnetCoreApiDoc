@@ -1,216 +1,273 @@
-# About
+<div align="center">
+
+# AspnetCoreApiDoc
+
+### Auto-generated API docs for ASP.NET Core · Protobuf by default
 
 [![Build Status](https://travis-ci.com/li-keli/AspnetCoreApiDoc.svg?branch=master)](https://travis-ci.com/li-keli/AspnetCoreApiDoc)
-[![Version Status](https://img.shields.io/badge/AspnetCoreApiDoc.version-v3.0.2-green.svg)](https://www.nuget.org/packages/AspnetCoreApiDoc)
-[![NetCore Status](https://img.shields.io/badge/.Net%20core-v2.2-blue.svg)](https://github.com/li-keli/AspnetCoreApiDoc)
-[![Platform Status](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey.svg)](https://github.com/li-keli/AspnetCoreApiDoc)
-[![top.996](https://img.shields.io/badge/link-top.996-red.svg)](https://github.com/top996/top.996)
+[![NuGet](https://img.shields.io/badge/NuGet-v3.0.2-green.svg)](https://www.nuget.org/packages/AspnetCoreApiDoc)
+[![.NET Core](https://img.shields.io/badge/.NET%20Core-2.0%20%7C%202.2-blue.svg)](https://github.com/li-keli/AspnetCoreApiDoc)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](https://github.com/li-keli/AspnetCoreApiDoc)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
+[![top.996](https://img.shields.io/badge/link-top.996-red.svg)](https://github.com/996icu/996.ICU)
 
-API documents are automatically generated, used to generate development help documents on the APP side, and the default `ProtoBuffer` transmission format.
+**Function-oriented API documentation for App / internal clients**  
+Build readable docs from interface definitions & XML comments, with built-in `application/x-protobuf` support
 
-This project is not a `RESTful` style, but a function-oriented API type. The role of APiDoc is to automatically generate API docking documents for internal developers based on the defined API interfaces and comments.
+[中文](README.md) · [Quick start](#quick-start) · [Features](#features) · [Screenshots](#screenshots) · [NuGet](#install)
 
-# Nuget
+</div>
 
-`Install-Package AspnetCoreApiDoc`
+---
 
-# About ProtoBuffer
+## About
 
-Official description：
+**AspnetCoreApiDoc** is an ASP.NET Core library that **auto-generates API integration docs**, primarily for **mobile apps and internal backends**.
 
-> Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.
+It is **not** a classic RESTful Swagger stack:
 
-# communicate with
+| Aspect | AspnetCoreApiDoc | Typical REST Swagger |
+|--------|------------------|----------------------|
+| API style | **Function-oriented** (by action / capability) | Resource-oriented REST |
+| Default wire format | **Protocol Buffers** (`application/x-protobuf`) | Mostly JSON |
+| Audience | App / internal developers | General HTTP API consumers |
+| Live updates | WebSocket refresh hints on the doc page | Usually manual reload |
+| Contract shape | **Proto2 / Proto3** snippets | OpenAPI / JSON Schema |
 
-* Bugs: [Issues](https://github.com/li-keli/AspnetCoreApiDoc/issues)
-* Gitter: [Gitter channel](https://gitter.im/AspnetCoreApiDoc/AspNetCoreApiDoc)
+In short:
 
-# Generate documentation example
+> Mark APIs with `[ApiDoc]`, keep XML comments, and get an internal integration handbook—with Protobuf as the first-class transport.
 
-![Sample document](img/Sample-img.png)
+---
 
-![Prompt immediately after the online document is updated](img/2018-04-11_11.06.png)
+## Features
 
-![Prompt immediately after the online document is updated](img/2018-04-11_11.07.png)
+- **No hand-written HTML** — scan controllers & models + XML comments  
+- **Protobuf first-class** — Input/Output formatters for `application/x-protobuf`  
+- **Proto2 / Proto3** switch on the doc side  
+- **Grouping & opt-out** — `[ApiDoc("Group")]` / `[ApiDoc(isCreateDoc: false)]`  
+- **Live update toast** — WebSocket notifies open doc pages when the service changes  
+- **CI badges** — optional Build / Coverage SVG on the doc page  
+- **External links** — attach extra network docs (blog, wiki, etc.)  
+- **Optional ES logging** — sample project includes Elasticsearch logger scaffolding  
+- **Companion tool** — `tool/apiprotoasnic.go` batch-downloads `.proto` files  
 
-# Documentation
+---
 
-**NO.1**
+## Screenshots
 
-After quoting the project, add the following code to the `ConfigureServices` method in `Startup.cs` to register the service:
+<p align="center">
+  <img src="img/Sample-img.png" alt="Sample API document" width="900" />
+  <br />
+  <sub>Generated API document UI (endpoints · request/response · Proto)</sub>
+</p>
 
-```c#
-    //Register API document service
-    services.AddProtoMvc(op =>
+| Live update hint | Toast bar |
+|:----------------:|:---------:|
+| <img src="img/2018-04-11_11.06.png" width="420" alt="update" /> | <img src="img/2018-04-11_11.07.png" width="320" alt="toast" /> |
+
+---
+
+## Architecture
+
+```text
+Controllers / Actions / Models  --[ApiDoc]+XML-->  ApiGenerator (ApiExplorer)
+                                                      |
+                    +---------------------------------+--------------------------------+
+                    v                                                                  v
+            UI  GET {DocRouter}/api.do                                    JSON POST {DocRouter}/doc
+                WS  {DocRouter}/ws                                        (Proto contract payload)
+
+Business path:
+  Client -- application/x-protobuf --> ProtobufInputFormatter --> Action
+         <-- application/x-protobuf -- ProtobufOutputFormatter <--
+```
+
+| Endpoint (example `DocRouter = /core/v1`) | Purpose |
+|-------------------------------------------|---------|
+| `GET /core/v1/api.do` | Document HTML |
+| `POST /core/v1/doc` | Document JSON data |
+| `WS /core/v1/ws` | Live-update channel |
+
+---
+
+## Install
+
+```powershell
+Install-Package AspnetCoreApiDoc
+```
+
+```bash
+dotnet add package AspnetCoreApiDoc
+```
+
+- NuGet: https://www.nuget.org/packages/AspnetCoreApiDoc  
+- Published versions: `2.0.0` … `3.0.2` (badge: **v3.0.2**)
+
+### Build from source
+
+```bash
+git clone https://github.com/li-keli/AspnetCoreApiDoc.git
+cd AspnetCoreApiDoc
+dotnet restore src/AspnetCoreDoc.sln
+dotnet build src/AspnetCoreDoc.sln
+dotnet run --project src/AspnetCoreDocTest
+```
+
+Open `http://localhost:5000/core/v1/api.do` (port depends on `launchSettings.json`).
+
+---
+
+## Quick start
+
+### 1. Register (`ConfigureServices`)
+
+```csharp
+services.AddProtoMvc(op =>
+{
+    op.IsOpenDoc = true;
+    op.ApiOptions = new ApiOptions
     {
-        op.IsOpenDoc = true; // Open document access
-        op.ApiOptions = new ApiOptions
+        DocRouter = "/core/v1",
+        ApiName = "Sample API Document",
+        APiVersion = "v1.0",
+        Copyright = "Copyright©2018-2011 api.com All Rights Reserved. ",
+        ProtoBufVersion = ProtoBufEnum.Proto3,
+        NetworkDocs = new List<NetworkDoc>
         {
-            //Route for API document access; recommended to be consistent with API address access
-            DocRouter = "/core/v1",
-            ApiName = "Sample API Document",
-            APiVersion = "v1.0",
-            Copyright = "Copyright©2018-2011 api.com All Rights Reserved. ",
-            ProtoBufVersion = ProtoBufEnum.Proto3,
-            NetworkDocs = new List<NetworkDoc>
-            {
-                new NetworkDoc
-                {
-                    Title = "Default Web Document One",
-                    Url = "https://www.baidu.com/"
-                },
-                new NetworkDoc
-                {
-                    Title = "My Blog",
-                    Url = "http://www.cnblogs.com/likeli/"
-                },
-            }
-        };
-        //Configure the ES log service address here
-        //op.ESOptions = new ESOptions
-        //{
-        // Uri = "http://192.168.0.1:9200",
-        // DefaultIndex = "test-log",
-        //};
-    });
-```
-
-**NO.2**
-
-Enable the service in the `Configure` method:
-
-```c#
-    app.UseStatusCodePages()
-        .UseApi(); //Enable API document generation
-```
-
-**NO.3**
-
-Add the `ApiDoc` feature mark to the controller `Controller` or `method `Action` that needs to generate API documentation
-
-E.g:
-
-Add on `Controller`:
-```c#
-    [ApiDoc, Route("core/v1/[controller]/[action]/")]
-    public class ApiController
-    {
-        ...
-    }
-```
-
-Add on `Action`:
-```c#
-    /// <summary>
-    /// Get product method 2
-    /// </summary>
-    /// <param name="input">input parameters</param>
-    /// <returns>output parameters</returns>
-    [ApiDoc, HttpPost]
-    public ProductInput GetProduct2([FromBody] ProductInput input)
-    {
-        return new ProductInput {ProductName = "All-in-one machine"};
-    }
-```
-
-After adding the ApiDoc feature to the controller, you can add `ApiDoc(false)` to the action under the controller to stop the document generation of a single method
-
-**NO.4**
-
-Add the configuration of generating XML to the `Project` node in the `.csproj` file of the API project and all its dependent projects, as follows:
-
-```C#
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <DocumentationFile>bin\Debug\netcoreapp2.0\{project name}.xml</DocumentationFile>
-    <DocumentationFile>bin\Release\netcoreapp2.0\{project name}.xml</DocumentationFile>
-    <NoWarn>1701;1702;1705;1591</NoWarn>
-  </PropertyGroup>
-```
-
-**NO.5**
-
-> Open `http://localhost:5000/core/v1/api.do` through the browser to access the API documentation
-
-Full example:
-
-```c#
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
+            new NetworkDoc { Title = "Default Web Document", Url = "https://www.baidu.com/" },
+            new NetworkDoc { Title = "My Blog", Url = "http://www.cnblogs.com/likeli/" },
         }
-    
-        public IConfiguration Configuration {get;}
-    
-        public void ConfigureServices(IServiceCollection services)
-        {
-            //Load logging component
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<ESClientProvider>();
-    
-            //Register API document service
-            services.AddProtoMvc(op =>
-            {
-                op.IsOpenDoc = true; // Open document access
-                op.ApiOptions = new ApiOptions
-                {
-                    //Route for API document access; recommended to be consistent with API address access
-                    DocRouter = "/core/v1",
-                    ApiName = "Sample API Document",
-                    APiVersion = "v1.0",
-                    Copyright = "Copyright©2018-2011 api.com All Rights Reserved. ",
-                    ProtoBufVersion = ProtoBufEnum.Proto3,
-                    NetworkDocs = new List<NetworkDoc>
-                    {
-                        new NetworkDoc
-                        {
-                            Title = "Default Web Document One",
-                            Url = "https://www.baidu.com/"
-                        },
-                        new NetworkDoc
-                        {
-                            Title = "My Blog",
-                            Url = "http://www.cnblogs.com/likeli/"
-                        },
-                    }
-                };
-                //Configure the ES log service address here
-                //op.ESOptions = new ESOptions
-                //{
-                // Uri = "http://192.168.0.1:9200",
-                // DefaultIndex = "test-log",
-                //};
-            });
-        }
-    
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            //Start ES log service
-            //loggerFactory
-            // .AddESLogger(app.ApplicationServices, "test-log", new FilterLoggerSettings
-            // {
-            // {"*", LogLevel.Trace},
-            // {"Microsoft", LogLevel.Warning},
-            // {"System", LogLevel.Warning},
-            // });
-            app.UseStatusCodePages()
-                .UseApi(); //Enable API document generation
-        }
-    }
+    };
+});
 ```
 
-# Other tools
+`AddProtoMvc` registers MVC, Protobuf formatters, and doc generation.
 
-The tool `apiprotoasnic.go` is provided in the tool directory to download proto files in batches. Based on Go, the source code is very simple, that is, to parse json. No separate documentation is provided here.
+### 2. Enable middleware (`Configure`)
 
-# Convention
+```csharp
+app.UseStatusCodePages()
+   .UseApi();
+```
 
-* The incoming parameters of all API methods must be read from the Body
+### 3. Mark APIs
 
-# License
+```csharp
+[ApiDoc("Public APIs"), Route("core/v1/[controller]/[action]/")]
+public class ApiController { /* ... */ }
 
-* MIT License
-* 996ICU [License](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+/// <summary>Get product (POST)</summary>
+[ApiDoc, HttpPost]
+public ProductInput GetProduct2([FromBody] ProductInput input)
+{
+    return new ProductInput { ProductName = "All-in-one" };
+}
+
+// Exclude one action:
+[HttpPost, ApiDoc(isCreateDoc: false)]
+public ProductInput GetProductNoDoc([FromBody] ProductInput input) { /* ... */ }
+```
+
+### 4. Annotate models
+
+```csharp
+[ProtoContract]
+public class ProductInput
+{
+    [ProtoMember(2)]
+    public int ProductId { get; set; }
+
+    [ProtoMember(1)]
+    public string ProductName { get; set; }
+}
+```
+
+### 5. Emit XML documentation
+
+```xml
+<PropertyGroup>
+  <TargetFramework>netcoreapp2.0</TargetFramework>
+  <DocumentationFile>bin\Debug\netcoreapp2.0\{project name}.xml</DocumentationFile>
+  <DocumentationFile>bin\Release\netcoreapp2.0\{project name}.xml</DocumentationFile>
+  <NoWarn>1701;1702;1705;1591</NoWarn>
+</PropertyGroup>
+```
+
+Apply to the API project **and** projects that own shared models.
+
+### 6. Open the doc
+
+```text
+http://localhost:5000/core/v1/api.do
+```
+
+See the full sample: [`src/AspnetCoreDocTest`](src/AspnetCoreDocTest).
+
+---
+
+## Repository layout
+
+```text
+AspnetCoreApiDoc/
+├── img/                    # Screenshots
+├── src/
+│   ├── AspnetCoreApiDoc/   # Core library
+│   ├── AspnetCoreDocTest/  # Runnable sample
+│   └── AspnetCoreDocUnitTest/
+├── tool/apiprotoasnic.go   # Batch download .proto
+├── README.md               # Chinese
+└── README-en.md            # This file
+```
+
+---
+
+## Tool: batch download Proto
+
+```bash
+cd tool
+go run apiprotoasnic.go -output output/ -platform dic
+```
+
+| Flag | Meaning |
+|------|---------|
+| `-output` | Output directory (default `output/`) |
+| `-platform` | Group key, e.g. `api` / `dic` |
+
+Adjust `targeUrl` inside the tool for your environment.
+
+---
+
+## Conventions
+
+1. **Body-only inputs** — documented APIs should read parameters from the request body (`[FromBody]`), matching binary Protobuf payloads.  
+2. **Accept filter** — when docs are enabled, non-document routes expect `Accept: application/x-protobuf` or may get 404.  
+3. **Not classic REST** — organized by function/action, not strict resource REST.  
+4. **Age of the codebase** — built around **.NET Core 2.x** (samples/CI: 2.0 / 2.2). Expect migration work for modern .NET; the design ideas still apply.
+
+---
+
+## Community
+
+| Channel | Link |
+|---------|------|
+| Issues | https://github.com/li-keli/AspnetCoreApiDoc/issues |
+| Gitter | https://gitter.im/AspnetCoreApiDoc/AspNetCoreApiDoc |
+| NuGet | https://www.nuget.org/packages/AspnetCoreApiDoc |
+
+---
+
+## License
+
+- [MIT License](LICENSE)  
+- 996ICU [License](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+
+---
+
+<div align="center">
+
+**Define the API and comments once — ship docs and Protobuf contracts together.**
+
+[中文 README](README.md)
+
+</div>
